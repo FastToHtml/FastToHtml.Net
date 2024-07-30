@@ -1,5 +1,4 @@
 ﻿using FastToHtml.Net.Element.Extension;
-using FastToHtml.Net.Script;
 using FastToHtml.Net.Style;
 
 namespace FastToHtml.Net.Element.Html
@@ -16,7 +15,8 @@ namespace FastToHtml.Net.Element.Html
         {
             Page = page;
             Styles = new StyleCollection();
-            Scripts = new ScriptCollection();
+            Script = new ScriptElement(this);
+            Children.Add(Script);
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace FastToHtml.Net.Element.Html
         /// <summary>
         /// 脚本集合
         /// </summary>
-        public ScriptCollection Scripts { get; }
+        public ScriptElement Script { get; }
 
         /// <summary>
         /// 标签名称

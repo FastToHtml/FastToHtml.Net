@@ -13,6 +13,7 @@ namespace FastToHtml.Net.Element.Html
     {
         private HeadElement _head; // 头部
         private BodyElement _body; // 主体
+        private int _serialNumberIndexer; // 序号索引器
 
         /// <summary>
         /// 页面
@@ -34,6 +35,15 @@ namespace FastToHtml.Net.Element.Html
         /// </summary>
         /// <returns></returns>
         public BodyElement Body() => _body;
+
+        /// <summary>
+        /// 获取新的序号
+        /// </summary>
+        /// <returns></returns>
+        public int GetNewSerialNumber()
+        {
+            return ++_serialNumberIndexer;
+        }
 
         /// <summary>
         /// 渲染

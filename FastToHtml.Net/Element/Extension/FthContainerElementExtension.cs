@@ -1,6 +1,7 @@
 ﻿using FastToHtml.Net.Element.Dependency;
 using FastToHtml.Net.Element.Html;
 using FastToHtml.Net.ElementAttribute;
+using FastToHtml.Net.Script.Html;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -40,6 +41,25 @@ namespace FastToHtml.Net.Element.Extension
         {
             TextElement div = new TextElement(element, text);
             element.Children.Add(div);
+            return element;
+        }
+
+        /// <summary>
+        /// 设置元素文本
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        public static TElement Text<TElement>(this TElement element, ScriptStatement scriptStatement)
+            where TElement : IFthContainerElement
+        {
+            // 元素挂载
+            element.Mount();
+            // 获取页面脚本元素
+            var pageScript = element.GetPageScript();
+            // 设置元素属性
+            ElementPropertySetScript elementPropertySet = new ElementPropertySetScript(pageScript, element, "innerText", scriptStatement);
+            // 添加到脚本集合中
+            pageScript.Scripts.Add(elementPropertySet);
             return element;
         }
 
