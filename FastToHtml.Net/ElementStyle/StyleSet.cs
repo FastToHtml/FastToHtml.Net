@@ -1,4 +1,5 @@
-﻿using FastToHtml.Net.Common.Dependency;
+﻿using FastToHtml.Net.Common.Constant;
+using FastToHtml.Net.Common.Dependency;
 using FastToHtml.Net.ElementStyle.Attribute;
 using FastToHtml.Net.ElementStyle.Dependency;
 using FastToHtml.Net.ElementStyle.Html;
@@ -13,7 +14,7 @@ namespace FastToHtml.Net.ElementStyle
     /// <summary>
     /// 样式集
     /// </summary>
-    public sealed class StyleSet : Dictionary<string, IFthStyle>
+    public class StyleSet : Dictionary<string, IFthStyle>
     {
         private static readonly Dictionary<string, string> _bindings;
 
@@ -36,19 +37,25 @@ namespace FastToHtml.Net.ElementStyle
         /// <summary>
         /// 宽度
         /// </summary>
-        [Style("width")]
+        [Style(HtmlStyles.WIDTH)]
         public string Width { get => GetPropertyValue(); set => SetPropertyValue(value); }
 
         /// <summary>
         /// 宽度
         /// </summary>
-        [Style("height")]
+        [Style(HtmlStyles.HEIGHT)]
         public string Height { get => GetPropertyValue(); set => SetPropertyValue(value); }
+
+        /// <summary>
+        /// 背景
+        /// </summary>
+        [Style(HtmlStyles.BACKGROUND)]
+        public string Background { get => GetPropertyValue(); set => SetPropertyValue(value); }
 
         /// <summary>
         /// 背景颜色
         /// </summary>
-        [Style("background-color")]
+        [Style(HtmlStyles.BACKGROUND_COLOR)]
         public string BackgroundColor { get => GetPropertyValue(); set => SetPropertyValue(value); }
 
         #endregion

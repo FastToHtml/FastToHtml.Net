@@ -25,14 +25,14 @@ namespace FastToHtml.Net.Element.Html
 
         private readonly FunctionScript _globalScript;
         private IFthCollectionScript _currentCollectionScript;
-        private PageElement _page;
+        private readonly PageElement _page;
 
         /// <summary>
         /// 脚本集合
         /// </summary>
-        public ScriptElement(IFthContainerElement parent) : base(parent)
+        public ScriptElement(HeadElement parent) : base(parent)
         {
-            _page = parent.GetPage();
+            _page = parent.Page;
             // 全局脚本
             _globalScript = new FunctionScript(this);
             _globalScript.Scripts.Add(new EidSuportedScript(this));

@@ -1,7 +1,9 @@
 ﻿using FastToHtml.Net.Element.Dependency;
 using FastToHtml.Net.Element.Html;
 using FastToHtml.Net.ElementAttribute;
+using FastToHtml.Net.ElementStyle;
 using FastToHtml.Net.Script.Html;
+using FastToHtml.Net.Style;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -19,7 +21,8 @@ namespace FastToHtml.Net.Element.Extension
         /// <summary>
         /// 创建一个数值常量
         /// </summary>
-        /// <param name="element"></param>
+        /// <param name="page"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
         public static NumberScriptConstant Number(this PageElement page, double value = 0)
         {
@@ -33,7 +36,8 @@ namespace FastToHtml.Net.Element.Extension
         /// <summary>
         /// 创建一个数值变量
         /// </summary>
-        /// <param name="element"></param>
+        /// <param name="page"></param>
+        /// <param name="statement"></param>
         /// <returns></returns>
         public static NumberScriptVariable NumberVariable(this PageElement page, NumberScriptStatement statement)
         {
@@ -48,7 +52,8 @@ namespace FastToHtml.Net.Element.Extension
         /// <summary>
         /// 创建一个数值变量
         /// </summary>
-        /// <param name="element"></param>
+        /// <param name="page"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
         public static NumberScriptVariable NumberVariable(this PageElement page, double value)
         {
@@ -59,6 +64,46 @@ namespace FastToHtml.Net.Element.Extension
             LetScript letScript = new LetScript(pageScript, variable, numberScriptConstant);
             pageScript.Scripts.Add(letScript);
             return variable;
+        }
+
+        #endregion
+
+        #region 样式
+
+        /// <summary>
+        /// 创建样式表
+        /// </summary>
+        /// <returns></returns>
+        public static CascadingStyleSheet CreateCss(this PageElement page)
+        {
+            return page.GetPageStyle().CreateCss();
+        }
+
+        /// <summary>
+        /// 创建样式表
+        /// </summary>
+        /// <returns></returns>
+        public static CascadingStyleSheet CreateCss(this PageElement page, StyleSet styles)
+        {
+            return page.GetPageStyle().CreateCss(styles);
+        }
+
+        /// <summary>
+        /// 创建元素样式表
+        /// </summary>
+        /// <returns></returns>
+        public static CascadingStyleSheet CreateElementCss(this PageElement page, string elementName)
+        {
+            return page.GetPageStyle().CreateElementCss(elementName);
+        }
+
+        /// <summary>
+        /// 创建元素样式表
+        /// </summary>
+        /// <returns></returns>
+        public static CascadingStyleSheet CreateElementCss(this PageElement page, string elementName, StyleSet styles)
+        {
+            return page.GetPageStyle().CreateElementCss(elementName, styles);
         }
 
         #endregion

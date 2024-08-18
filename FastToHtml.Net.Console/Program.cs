@@ -1,4 +1,5 @@
 ﻿using FastToHtml.Net;
+using FastToHtml.Net.Common.Constant;
 using FastToHtml.Net.Element.Extension;
 using FastToHtml.Net.Element.Html;
 using System.Diagnostics;
@@ -15,19 +16,15 @@ namespace FastToHtml.Net.Console
             var page = FastToHtmlHelper.CreatePage();
             // 设置页面标题
             page.Head().Title("First Page");
+            // 设置样式
+            var helloCss = page.CreateCss(new() { BackgroundColor = "#ffaa00" });
+            var buttonCss = page.CreateCss(new() { Width = "200px", Height = "50px", BackgroundColor = "#009900" });
             // 获取页面主体
             var body = page.Body();
             // 创建Hello World文本块
-            var helloDiv = body.Div().Text("Hello World");
+            var helloDiv = body.Div().Css(helloCss).Text("Hello World");
             // 创建有色区域
-            body.Div()
-                .Style(new()
-                {
-                    Width = "200px",
-                    Height = "50px",
-                    BackgroundColor = "#009900"
-                })
-                .Text("Line2")
+            body.Div().Css(buttonCss).Text("Line2")
                 .OnClick(() =>
                 {
                     var num = page.NumberVariable(2);

@@ -4,6 +4,7 @@ using FastToHtml.Net.ElementAttribute;
 using FastToHtml.Net.ElementStyle;
 using FastToHtml.Net.ElementStyle.Html;
 using FastToHtml.Net.Script.Html;
+using FastToHtml.Net.Style;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -38,6 +39,27 @@ namespace FastToHtml.Net.Element.Extension
         /// 定义样式
         /// </summary>
         /// <param name="element"></param>
+        /// <param name="cascadingStyleSheets"></param>
+        /// <returns></returns>
+        public static TElement Css<TElement>(this TElement element, params CascadingStyleSheet[] cascadingStyleSheets)
+            where TElement : IFthElement
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var cascadingStyleSheet in cascadingStyleSheets)
+            {
+                if (!cascadingStyleSheet.Name.StartsWith(".")) { continue; }
+                if (sb.Length > 0) { sb.Append(' '); }
+                sb.Append(cascadingStyleSheet.Name[1..]);
+            }
+            element.Property("class", sb.ToString());
+            return element;
+        }
+
+        /// <summary>
+        /// 定义样式
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="styles"></param>
         /// <returns></returns>
         public static TElement Style<TElement>(this TElement element, StyleSet styles)
             where TElement : IFthElement
@@ -62,14 +84,14 @@ namespace FastToHtml.Net.Element.Extension
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
-        public static StyleElement GetPageStyles(this IFthElement element)
+        public static StyleElement GetPageStyle(this IFthElement element)
         {
             return element switch
             {
-                PageElement page => page.Head().GetPageStyles(),
-                BodyElement body => body.Page.GetPageStyles(),
+                PageElement page => page.Head().GetPageStyle(),
+                BodyElement body => body.Page.GetPageStyle(),
                 HeadElement header => header.Styles,
-                IFthGeneralElement generalElement => generalElement.Parent.GetPageStyles(),
+                IFthGeneralElement generalElement => generalElement.Parent.GetPageStyle(),
                 _ => throw new Exception($"Element type {element.GetType().FullName} not supported method 'GetStyles'."),
             };
         }
@@ -140,7 +162,7 @@ namespace FastToHtml.Net.Element.Extension
             {
                 PageElement page => page.Head().GetPageScript(),
                 BodyElement body => body.Page.GetPageScript(),
-                HeadElement header => header.Script,
+                HeadElement header => header.Scripts,
                 IFthGeneralElement generalElement => generalElement.Parent.GetPageScript(),
                 _ => throw new Exception($"Element type {element.GetType().FullName} not supported method 'GetScripts'."),
             };
