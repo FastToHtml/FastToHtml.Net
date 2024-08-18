@@ -13,9 +13,13 @@ namespace FastToHtml.Net.Console
         {
             // 构建页面
             var page = FastToHtmlHelper.CreatePage();
+            // 设置页面标题
             page.Head().Title("First Page");
+            // 获取页面主体
             var body = page.Body();
+            // 创建Hello World文本块
             var helloDiv = body.Div().Text("Hello World");
+            // 创建有色区域
             body.Div()
                 .Style(new()
                 {

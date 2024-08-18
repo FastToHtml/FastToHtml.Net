@@ -1,5 +1,4 @@
 ﻿using FastToHtml.Net.Element.Extension;
-using FastToHtml.Net.Style;
 
 namespace FastToHtml.Net.Element.Html
 {
@@ -14,7 +13,7 @@ namespace FastToHtml.Net.Element.Html
         public HeadElement(PageElement page)
         {
             Page = page;
-            Styles = new StyleCollection();
+            Styles = new StyleElement(this);
             Script = new ScriptElement(this);
             Children.Add(Script);
         }
@@ -27,7 +26,7 @@ namespace FastToHtml.Net.Element.Html
         /// <summary>
         /// 样式集合
         /// </summary>
-        public StyleCollection Styles { get; }
+        public StyleElement Styles { get; }
 
         /// <summary>
         /// 脚本集合

@@ -4,7 +4,6 @@ using FastToHtml.Net.ElementAttribute;
 using FastToHtml.Net.ElementStyle;
 using FastToHtml.Net.ElementStyle.Html;
 using FastToHtml.Net.Script.Html;
-using FastToHtml.Net.Style;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -63,7 +62,7 @@ namespace FastToHtml.Net.Element.Extension
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
-        public static StyleCollection GetPageStyles(this IFthElement element)
+        public static StyleElement GetPageStyles(this IFthElement element)
         {
             return element switch
             {
